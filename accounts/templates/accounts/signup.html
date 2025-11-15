@@ -1,0 +1,41 @@
+<!-- accounts/templates/accounts/signup.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Signup{% endblock %}
+{% block content %}
+  <h2>Signup</h2>
+  <form method="post" enctype="multipart/form-data" id="signupForm">
+    {% csrf_token %}
+    <table class="form-table">
+      {{ form.as_table }}
+    </table>
+
+    <div class="pw-check">
+      <small id="pwMsg"></small>
+    </div>
+
+    <div>
+      <button type="submit" class="btn">Create account</button>
+    </div>
+  </form>
+
+  <script>
+    // minimal client-side password match check
+    (function(){
+      const form = document.getElementById('signupForm');
+      const pw = form.querySelector('input[name="password"]');
+      const cpw = form.querySelector('input[name="confirm_password"]');
+      const pwMsg = document.getElementById('pwMsg');
+
+      function check(){
+        if(!pw || !cpw) return;
+        if(pw.value === '' && cpw.value === '') { pwMsg.textContent = ''; return; }
+        pwMsg.textContent = pw.value === cpw.value ? 'Passwords match' : 'Passwords do not match';
+      }
+      if(pw && cpw){
+        pw.addEventListener('input', check);
+        cpw.addEventListener('input', check);
+      }
+    })();
+  </script>
+{% endblock %}

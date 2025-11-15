@@ -1,0 +1,11 @@
+<!-- accounts/templates/accounts/home.html -->
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  <h1>Welcome</h1>
+  <p>This is a simple role-based signup/login demo (Patients & Doctors).</p>
+  <p>
+    <a class="btn" href="{% url 'signup' %}">Create an account</a>
+    <a class="btn" href="{% url 'login' %}">Login</a>
+  </p>
+{% endblock %}
