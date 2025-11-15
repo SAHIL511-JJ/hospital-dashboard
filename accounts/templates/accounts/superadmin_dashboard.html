@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Super Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Super Admin Dashboard</h2>
+
+<p>Welcome, {{ user.username }} (Superuser)</p>
+
+<hr>
+
+<h3>All Doctors</h3>
+{% if doctors %}
+<table class="info-table">
+    <tr>
+        <th>Profile</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Role</th>
+    </tr>
+    {% for d in doctors %}
+    <tr>
+        <td>
+            {% if d.profile_pic %}
+                <img src="{{ d.profile_pic.url }}" class="profile-pic" style="width:60px;height:60px;border-radius:6px;">
+            {% else %}
+                No Image
+            {% endif %}
+        </td>
+        <td>{{ d.first_name }} {{ d.last_name }}</td>
+        <td>{{ d.username }}</td>
+        <td>{{ d.email }}</td>
+        <td>
+            {{ d.address_line1 }}<br>
+            {{ d.city }}, {{ d.state }}<br>
+            {{ d.pincode }}
+        </td>
+        <td>{{ d.get_role_display }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No doctors found.</p>
+{% endif %}
+
+<hr>
+
+<h3>All Patients</h3>
+{% if patients %}
+<table class="info-table">
+    <tr>
+        <th>Profile</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Role</th>
+    </tr>
+    {% for p in patients %}
+    <tr>
+        <td>
+            {% if p.profile_pic %}
+                <img src="{{ p.profile_pic.url }}" class="profile-pic" style="width:60px;height:60px;border-radius:6px;">
+            {% else %}
+                No Image
+            {% endif %}
+        </td>
+        <td>{{ p.first_name }} {{ p.last_name }}</td>
+        <td>{{ p.username }}</td>
+        <td>{{ p.email }}</td>
+        <td>
+            {{ p.address_line1 }}<br>
+            {{ p.city }}, {{ p.state }}<br>
+            {{ p.pincode }}
+        </td>
+        <td>{{ p.get_role_display }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No patients found.</p>
+{% endif %}
+
+{% endblock %}
